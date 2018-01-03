@@ -1,0 +1,14 @@
+{
+  "name": "weather-o-rama",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Abhinav Verma",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.83.0"
+  }
+}
