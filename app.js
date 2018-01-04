@@ -1,18 +1,7 @@
-const yargs = require('yargs');
-
+const argvProcessor = require('./argv-processor');
 const geocode = require('./geocode');
 
-const argv = yargs
-                .options({
-                    address: {
-                        describe: 'Address to get weather details for',
-                        demandOption: true,
-                        alias: 'a',
-                        string: true
-                    }
-                })
-                .help()
-                .argv;
+const argv = argvProcessor.argv;
 
 geocode.geocodeAddress(argv.address, (error, results) => {
     if (error) {
