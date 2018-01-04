@@ -1,13 +1,24 @@
 const argvProcessor = require('./argv-processor');
 const geocode = require('./geocode');
+const weather = require('./weather');
 
-const argv = argvProcessor.argv;
+const address = argvProcessor.argv.address;
 
-geocode.geocodeAddress(argv.address, (error, results) => {
+geocode.geocodeAddress(address, (error, geocodeDetails) => {
     if (error) {
         console.log(error);
     }
     else {
-        console.log(JSON.stringify(results, undefined, 2));
+        weather.getWeather(geocodeDetails.latitude, geocodeDetails.longitude, (error, weatherDetails) => {
+            if (error) {
+                console.log(error);
+            }
+            else {
+                console.log(`It is ${weatherDetails.temperature} F in ${geocodeDetails.address}.`);
+                if (weatherDetails.temperature !== weatherDetails.apparentTemperature) {
+                    console.log(`But it feels like ${weatherDetails.apparentTemperature} F.`);
+                }
+            }
+        });
     }
 });
